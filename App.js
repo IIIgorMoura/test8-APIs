@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
-import { buscarVideos } from './youtube';
+import { buscarVideosYoutube } from './youtube';
+import { buscarVideosVimeo } from './vimeo';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, ScrollView, KeyboardAvoidingView } from 'react-native';
 
 export default function App() {
@@ -9,7 +10,7 @@ export default function App() {
 
   const pesquisar = async () => {
     try {
-      const resultados = await buscarVideos(pesquisa);
+      const resultados = await buscarVideosYoutube(pesquisa);
       setVideos(resultados);
     } catch (erro) {
       console.error('Erro ao pesquisar vídeos:', erro);

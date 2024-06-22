@@ -12,12 +12,12 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "axios": "^1.7.2",
-    "expo": "~51.0.10",
+    "expo": "~51.0.14",
     "expo-status-bar": "~1.12.1",
     "install": "^0.13.0",
     "npm": "^10.8.1",
     "react": "18.2.0",
-    "react-native": "0.74.1",
+    "react-native": "0.74.2",
     "react-native-webview": "13.8.6"
   },
   "devDependencies": {
