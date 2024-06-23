@@ -1,50 +1,56 @@
 import React, { useState } from 'react';
-import { WebView } from 'react-native-webview';
-import { buscarVideosYoutube } from './youtube';
-import { buscarVideosVimeo } from './vimeo';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './routes';
 
 export default function App() {
-  const [pesquisa, setpesquisa] = useState('');  
-  const [videos, setVideos] = useState([]);
+  // const [pesquisa, setpesquisa] = useState('');
+  // const [videos, setVideos] = useState([]);
 
-  const pesquisar = async () => {
-    try {
-      const resultados = await buscarVideosYoutube(pesquisa);
-      setVideos(resultados);
-    } catch (erro) {
-      console.error('Erro ao pesquisar vídeos:', erro);
-    }
-  };
+  // const pesquisar = async () => {
+  //   try {
+  //     const resultados = await buscarVideosYoutube(pesquisa);
+  //     setVideos(resultados);
+  //   } catch (erro) {
+  //     console.error('Erro ao pesquisar vídeos:', erro);
+  //   }
+  // };
 
   return (
-    <KeyboardAvoidingView style={estilos.container}>
-      <View style={estilos.containerPesquisa}>
-        <TextInput
-          style={estilos.entrada}
-          placeholder="Digite sua pesquisa"
-          value={pesquisa}
-          onChangeText={setpesquisa}
-        />
-        <TouchableOpacity style={estilos.botao} onPress={pesquisar}>
-          <Text style={estilos.textoBotao}>Pesquisar</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView style={estilos.scrollView}>
-        {videos.map(video => (
-          <View key={video.id.videoId} style={estilos.containerVideo}>
-            <Text style={estilos.tituloVideo}>{video.snippet.title}</Text>
-            <WebView
-              style={estilos.webview}
-              javaScriptEnabled={true}
-              domStorageEnabled={true}
-              source={{ html: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>` }}
-            />
-          </View>
-        ))}
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <NavigationContainer>
+      <StatusBar style="auto" />
+      <Routes />
+    </NavigationContainer>
   );
+  // <KeyboardAvoidingView style={estilos.container}>
+  //   <Text>Bem Vindo!</Text>
+  //   <Text>Este é seu App de busca tanto no Youtube quanto no Vimeo</Text>
+  //   <View style={estilos.containerPesquisa}>
+  //     <TextInput
+  //       style={estilos.entrada}
+  //       placeholder="Digite sua pesquisa"
+  //       value={pesquisa}
+  //       onChangeText={setpesquisa}
+  //     />
+  //     <TouchableOpacity style={estilos.botao} onPress={pesquisar}>
+  //       <Text style={estilos.textoBotao}>Pesquisar</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  //   <ScrollView style={estilos.scrollView}>
+  //     {videos.map(video => (
+  //       <View key={video.id.videoId} style={estilos.containerVideo}>
+  //         <Text style={estilos.tituloVideo}>{video.snippet.title}</Text>
+  //         <WebView
+  //           style={estilos.webview}
+  //           javaScriptEnabled={true}
+  //           domStorageEnabled={true}
+  //           source={{ html: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>` }}
+  //         />
+  //       </View>
+  //     ))}
+  //   </ScrollView>
+  // </KeyboardAvoidingView>
+  // );
 }
 
 const estilos = StyleSheet.create({

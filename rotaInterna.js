@@ -1,24 +1,25 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { buscarVideosYoutube } from './youtube';
-import { buscarVideosVimeo } from './vimeo';
+import { Image } from 'react-native';
+import YouTube from './youtubeTela';
+import Vimeo from './vimeoTela';
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+export default function MyTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen
                 name="Youtube"
-                component={buscarVideosYoutube}
+                component={YouTube}
                 options={{
                     tabBarBadge: 1,
                     tabBarShowLabel: false,
                     headerShown: false,
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
-                            return (<Ionicons size={25} color={"#000"} name="home" />)
+                            return (<Image source={require('./assets/youtubeLogo.png')} size={15} />)
                         }
-                        return (<Ionicons size={20} color={"#000"} name="home-outline" />)
+                        return (<Image source={require('./assets/youtubeLogo.png')} size={20} />)
                     }
                 }}
             >
@@ -26,15 +27,15 @@ function MyTabs() {
 
             <Tab.Screen
                 name="Vimeo"
-                component={buscarVideosVimeo}
+                component={Vimeo}
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
-                            return (<Ionicons size={25} color={"#000"} name="lock-closed" />)
+                            return (<Image source={require('./assets/vimeoLogo.png')} size={15} />)
                         }
-                        return (<Ionicons size={20} color={"#000"} name="lock-closed-outline" />)
+                        return (<Image source={require('./assets/vimeoLogo.png')} size={20} />)
                     }
                 }}
             >
