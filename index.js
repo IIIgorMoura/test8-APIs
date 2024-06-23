@@ -1,44 +1,32 @@
 import React, { useState } from 'react';
-import { WebView } from 'react-native-webview';
-import { BuscarVideosYoutube } from './youtube';
-import { BuscarVideosVimeo } from './vimeo';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Home() {
     const navigation = useNavigation();
-    const [pesquisa, setpesquisa] = useState('');
-    const [videosYoutube, setVideosYoutube] = useState([]);
-    const [videosVimeo, setVideosVimeo] = useState([]);
-
-    const pesquisar = async () => {
-        try {
-            const resultadosYoutube = await BuscarVideosYoutube(pesquisa);
-            const resultadosVimeo = await BuscarVideosVimeo(pesquisa);
-            setVideosYoutube(resultadosYoutube);
-            setVideosVimeo(resultadosVimeo)
-        } catch (erro) {
-            console.error('Erro ao pesquisar vídeos:', erro);
-        }
-    };
 
     return (
         <KeyboardAvoidingView style={estilos.container}>
-            <Text style={estilos.textoTitulo}>Bem Vindo!</Text>
-            <Text style={estilos.texto}>Pesquise tanto no Vimeo quanto no Youtube</Text>
-            <TextInput
-                style={estilos.entrada}
-                placeholder="Digite sua pesquisa"
-                placeholderTextColor={"gray"}
-                value={pesquisa}
-                onChangeText={setpesquisa}
-            />
+            <View style={estilos.baseTituloPag}>
+                <Text style={estilos.textoTitulo}>Bem Vindo!</Text>
+                <Text style={estilos.texto}>Pesquise tanto no Vimeo quanto no Youtube</Text>
+            </View>
 
-            <TouchableOpacity style={estilos.botao} onPress={() => { pesquisar ; navigation.navigate('Youtube') ; navigation.navigate('RotaInterna')}}>
+
+            <TouchableOpacity style={estilos.botao} onPress={() => {
+                navigation.navigate('RotaInterna', {
+                    screen: 'Youtube',
+                })
+            }}>
                 <Image source={require('./assets/youtubeLogo.png')} />
                 <Text style={estilos.textoBotao}>Buscar no Youtube</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={estilos.botao} onPress={() => { pesquisar ; navigation.navigate('Vimeo') ; navigation.navigate('RotaInterna')}}>
+            <TouchableOpacity style={estilos.botao} onPress={() => {
+                navigation.navigate('RotaInterna', {
+                    screen: 'Vimeo',
+                })
+            }}>
+
                 <Image source={require('./assets/vimeoLogo.png')} />
                 <Text style={estilos.textoBotao}>Buscar no Vimeo</Text>
             </TouchableOpacity>
@@ -56,7 +44,7 @@ export default function Home() {
                     </View>
                 ))}
             </ScrollView> */}
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingView >
     );
 }
 
@@ -68,7 +56,7 @@ const estilos = StyleSheet.create({
         paddingTop: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        
+
         backgroundColor: "#000",
     },
     textoTitulo: {
@@ -79,6 +67,10 @@ const estilos = StyleSheet.create({
     texto: {
         color: "#fff",
     },
+    baseTituloPag: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },  
     entrada: {
         width: '90%',
         height: 60,

@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StyleSheet } from 'react-native';
 import { Image } from 'react-native';
 import YouTube from './youtubeTela';
 import Vimeo from './vimeoTela';
@@ -12,14 +13,13 @@ export default function MyTabs() {
                 name="Youtube"
                 component={YouTube}
                 options={{
-                    tabBarBadge: 1,
                     tabBarShowLabel: false,
                     headerShown: false,
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
-                            return (<Image source={require('./assets/youtubeLogo.png')} size={15} />)
+                            return (<Image source={require('./assets/youtubeLogo.png')} style={estilos.iconIn} />)
                         }
-                        return (<Image source={require('./assets/youtubeLogo.png')} size={20} />)
+                        return (<Image source={require('./assets/youtubeLogo.png')} style={estilos.iconOut} />)
                     }
                 }}
             >
@@ -33,9 +33,9 @@ export default function MyTabs() {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
-                            return (<Image source={require('./assets/vimeoLogo.png')} size={15} />)
+                            return (<Image source={require('./assets/vimeoLogo.png')} style={estilos.iconIn} />)
                         }
-                        return (<Image source={require('./assets/vimeoLogo.png')} size={20} />)
+                        return (<Image source={require('./assets/vimeoLogo.png')} style={estilos.iconOut} />)
                     }
                 }}
             >
@@ -43,3 +43,13 @@ export default function MyTabs() {
         </Tab.Navigator>
     );
 }
+const estilos = StyleSheet.create({
+    iconOut: {
+        width: '10%',
+        height: '30%',
+    },
+    iconIn: {
+        width: '20%',
+        height: '60%',
+    },
+ });

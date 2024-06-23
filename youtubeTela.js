@@ -4,6 +4,7 @@ import { BuscarVideosYoutube } from './youtube';
 import { BuscarVideosVimeo } from './vimeo';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, ScrollView, KeyboardAvoidingView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons/';
 
 export default function YouTube() {
     const [videosYoutube, setVideosYoutube] = useState([]);
@@ -20,15 +21,23 @@ export default function YouTube() {
 
     return (
         <KeyboardAvoidingView style={estilos.container}>
-            <Text style={estilos.textoTitulo}>Bem Vindo!</Text>
-            <Text style={estilos.texto}>Pesquise tanto no Vimeo quanto no Youtube</Text>
-            <TextInput
-                style={estilos.entrada}
-                placeholder="Digite sua pesquisa"
-                placeholderTextColor={"gray"}
-                value={pesquisa}
-                onChangeText={setpesquisa}
-            />
+            <View style={estilos.tituloPag}>
+                <Image style={estilos.logo} source={require('./assets/youtubeLogo.png')} />
+                <Text style={estilos.textoTitulo}>Youtube</Text>
+            </View>
+
+            <View style={estilos.entrada}>
+                <TextInput style={estilos.areaPesquisa }
+                    placeholder="Digite sua pesquisa"
+                    placeholderTextColor={"gray"}
+                    value={pesquisa}
+                    onChangeText={setpesquisa}
+                />
+                <TouchableOpacity onPress={pesquisar}>
+                    <Ionicons size={25} color={"#fff"} name="search" />
+                </TouchableOpacity>
+            </View>
+
             <ScrollView style={estilos.scrollView}>
                 {videosYoutube.map(video => (
                     <View key={video.id.videoId} style={estilos.containerVideo}>
@@ -57,6 +66,15 @@ const estilos = StyleSheet.create({
 
         backgroundColor: "#000",
     },
+    tituloPag: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '90%',
+        margin: 0,
+    },
+    logo: {
+        marginRight: 10,
+    },
     textoTitulo: {
         color: '#fff',
         fontSize: 20,
@@ -75,6 +93,12 @@ const estilos = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#fff",
         marginVertical: 25,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    areaPesquisa: {
+        color: '#fff',
+        width: '90%',
     },
     botao: {
         paddingVertical: 15,
@@ -98,25 +122,20 @@ const estilos = StyleSheet.create({
     },
     containerVideo: {
         marginBottom: 20,
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        padding: 15,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    tituloVideo: {
+        backgroundColor: '#252525',
+        borderRadius: 10,
+      },
+      tituloVideo: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
-    },
-    webview: {
+        color: '#fff',
+        padding: 10,
+      },
+      webview: {
         width: '100%',
+        height: '100%',
         aspectRatio: 16 / 9,
-    }
+        backgroundColor: '#252525',
+      }
 });
