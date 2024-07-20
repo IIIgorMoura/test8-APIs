@@ -7,7 +7,7 @@ export default function App() {
   // const [pesquisa, setpesquisa] = useState('');
   // const [videos, setVideos] = useState([]);
 
-  // const pesquisar = async () => {
+  // const pesquisar = async () => { 
   //   try {
   //     const resultados = await buscarVideosYoutube(pesquisa);
   //     setVideos(resultados);

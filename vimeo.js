@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY_VIMEO = '';
+const API_KEY_VIMEO = ''; 
 
 export const BuscarVideosVimeo = async (query) => {
   try {
